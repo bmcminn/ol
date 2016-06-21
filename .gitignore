@@ -1,0 +1,19 @@
+# DEPENDENCY FOLDERS
+node_modules/
+
+# ENVIRONMENT CONFIGS
+.env
+
+# SERVER LOGS
+logs/
+*.log
+
+# BUILD FILES
+public/build/
+public/data/
+
+# MISC THINGS
+__*
+
+# SUBLIME STUFF
+*-workspace

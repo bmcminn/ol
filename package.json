@@ -1,0 +1,50 @@
+{
+  "name": "ownlocal-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "node bin/bootstrap",
+    "serve": "node bin/serve --spa",
+    "build": "webpack",
+    "css": "stylus src/stylus/main.styl -o public/css/main.css",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm-scripts-watcher"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmcminn/ol.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bmcminn/ol/issues"
+  },
+  "author": "Brandtley McMinn",
+  "license": "MIT",
+  "homepage": "https://github.com/bmcminn/ol#readme",
+  "watch": {
+    "src/**/*.styl": [
+      "css"
+    ],
+    "src/**/*.js": [
+      "build"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.12.0",
+    "jquery": "^3.0.0",
+    "lodash": "^4.13.1",
+    "page.js": "^4.13.3",
+    "pathjs": "^0.8.1",
+    "zepto-webpack": "^1.1.6"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0",
+    "grunt": "^1.0.1",
+    "json-loader": "^0.5.4",
+    "node-static": "^0.7.7",
+    "npm-scripts-watcher": "^1.0.2",
+    "simple-node-logger": "^0.93.12",
+    "stylus": "^0.54.5",
+    "webpack": "^1.13.1"
+  }
+}
