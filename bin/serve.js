@@ -6,7 +6,7 @@ require('dotenv').load();
  * Node static instance script
  * @sauce: https://github.com/cloudhead/node-static
  */
-var static      = require('node-static
+var static      = require('node-static')
 ,   path        = require('path')
 ,   url         = require('url')
 ,   execSync    = require('child_process').execSync
