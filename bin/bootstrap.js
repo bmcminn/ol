@@ -3,8 +3,10 @@ var path    = require('path')
 ,   fs      = require('grunt').file
 ;
 
-
+// generate css/ folder if needed
 fs.mkdir(path.resolve(process.cwd(), 'public', 'css'));
+
+// generate logs/ folder
 fs.mkdir(path.resolve(process.cwd(), 'logs'));
 
 
@@ -21,4 +23,6 @@ var envContents = [
 ,   'USE_API_PROXY=false'
 ].join('\n');
 
+
+// write base environment file to disk
 fs.write(path.resolve(process.cwd(), '.env'), envContents);
