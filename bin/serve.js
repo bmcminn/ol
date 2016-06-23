@@ -50,6 +50,11 @@ console.log(`Serving "/public" at http://${serverConfig.hostname}:${serverConfig
 
 require('http').createServer(function (request, response) {
 
+    if (process.env.USE_API_PROXY === false && request.url.match(/\/api\//i)) {
+        console.log("Since you're not using the API proxy, you should probably change the `axios.defaults.baseURL` variable in `src/main.js`");
+        return;
+    }
+
     // setup a proxy for the API calls
     if (process.env.USE_API_PROXY && request.url.match(/\/api\//i)) {
 
