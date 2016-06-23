@@ -8,6 +8,7 @@ require('dotenv').load();
  */
 var static      = require('node-static')
 ,   path        = require('path')
+,   fs          = require('grunt').file
 ,   url         = require('url')
 ,   execSync    = require('child_process').execSync
 ;
@@ -34,7 +35,7 @@ api.route = function(target) { return ; };
 //
 
 var serverConfig = {
-    cache: 3600
+    cache: false
 ,   dir: path.resolve(process.cwd(), 'public')
 ,   hostname: 'localhost'
 ,   port: 8080
@@ -67,9 +68,18 @@ require('http').createServer(function (request, response) {
     }
 
 
+    // fake the server config that would load index.html as the primary router for all routes
+    if (!request.url.match(/\.(?:css|js|woff2)/g)) {
+        response.write(fs.read(path.resolve(process.cwd(), 'public', 'index.html')));
+        response.end();
+        return;
+    }
+
+
     request.addListener('end', function () {
-        // Serve files!
         fileServer.serve(request, response, function (err, res) {
+
+            // Serve files!
             if (err && (err.status === 404)) { // If the file wasn't found
                 fileServer.serveFile('/not-found.html', 404, {}, request, response);
             }
