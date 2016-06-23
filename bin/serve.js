@@ -35,7 +35,7 @@ api.route = function(target) { return ; };
 //
 
 var serverConfig = {
-    cache: false
+    cache: 3600
 ,   dir: path.resolve(process.cwd(), 'public')
 ,   hostname: 'localhost'
 ,   port: 8080
@@ -54,10 +54,14 @@ require('http').createServer(function (request, response) {
     if (process.env.USE_API_PROXY && request.url.match(/\/api\//i)) {
 
         var route = url.parse(request.url);
-        // route.path = route.path.replace(/^\/api/, '');
+        route.path = route.path.replace(/^\/api/, '');
+
+        var apiRoute = url.resolve(api.url, route.path);
+
+        console.log(apiRoute);
 
         // execute a curl command to proxy this stuff
-        var res = execSync('curl ' + url.resolve(api.url, route.path), { encoding: 'utf8' });
+        var res = execSync('curl ' + apiRoute, { encoding: 'utf8' });
 
         // write the response back to client
         response.write(res);
@@ -69,7 +73,7 @@ require('http').createServer(function (request, response) {
 
 
     // fake the server config that would load index.html as the primary router for all routes
-    if (!request.url.match(/\.(?:css|js|woff2)/g)) {
+    if (!request.url.match(/\.(?:css|js|woff2|png|gif|jpg|jpeg)/g)) {
         response.write(fs.read(path.resolve(process.cwd(), 'public', 'index.html')));
         response.end();
         return;

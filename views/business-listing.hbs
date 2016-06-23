@@ -1,0 +1,12 @@
+Business Listings
+
+{{> pagination }}
+
+<ul>
+{{#each businesses}}
+    <li><a href="/businesses/{{ id }}">{{ name }}</a></li>
+{{/each}}
+</ul>
+
+{{> pagination }}
+

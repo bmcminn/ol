@@ -1,0 +1,30 @@
+<h1>{{ name }}</h1>
+
+<dl>
+{{#if website}}
+    <dt>Website</dt>
+    <dd>
+        <a href="{{ website }}" class="fa-web">{{ website }}</a>
+    </dd>
+{{/if}}
+
+
+{{#if phone}}
+    <dt>Phone</dt>
+    <dd>
+        <a href="tel:{{ phone }}" class="fa-phone">{{ phone }}</a>
+    </dd>
+{{/if}}
+
+{{#if address}}
+    <dt>Address</dt>
+    <dd>
+        <address>
+            {{ address }}<br>
+            {{#if address2 }}{{ address2 }}{{/if}}<br>
+            {{ city }}, {{ state }} {{ zip }}<br>
+            {{ country }}
+        </address>
+    </dd>
+{{/if}}
+</dl>

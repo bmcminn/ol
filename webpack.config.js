@@ -4,7 +4,7 @@ require('dotenv').load();
 
 
 var path        = require('path')
-,   entryPath   = path.resolve(__dirname, 'src', 'main.js')
+,   entryPath   = path.resolve(__dirname, 'src', 'js', 'main.js')
 ,   buildPath   = path.resolve(__dirname, 'public', 'build')
 ,   buildName   = 'bundle.js'
 
@@ -69,7 +69,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /^\.\/.+\.js$/,
+                test: /^\.\/.+(\.js)?$/,
                 loader: 'script-loader'
             },
             {

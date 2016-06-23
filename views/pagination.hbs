@@ -1,0 +1,11 @@
+{{#if pages }}
+    {{#each pages}}
+        <nav role="pagination">
+            {{#if first}}<a href="/businesses/page/1">First</a>{{/if}}
+
+
+
+            {{#if last}}<a href="/businesses/page/{{ lastIndex }}">Last</a>{{/if}}
+        </nav>
+    {{/each}}
+{{/if}}
