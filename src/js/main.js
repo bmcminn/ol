@@ -6,14 +6,17 @@ var $       = require('./libs/jquery.js')
 ,   _       = require('./lodash.js')
 ;
 
+// initialize window instances for client console use
 window.$ = $;
 
 
-$(document).ready(function() {
+(function() {
 
-    var localStorage    = require('./local-storage.js')
-    ,   Handlebars      = require('handlebars/runtime')
-    ;
+
+    // Setup Handlebars instance
+    // =================================================================
+
+    var Handlebars = require('./handlebars.js');
 
     // call in the precompiled handlebars files
     require('./template-files.js')
@@ -22,19 +25,107 @@ $(document).ready(function() {
     Handlebars.partials = Handlebars.templates;
 
 
+    // Setup Application instance container
+    // =================================================================
 
-    var app = {};
+    var App = {
 
-    app.$container  = $('[role="app"]');
+    };
+
+    App.$container  = $('[role="app"]');
 
 
+    // setup page sizes list for controlling number of lsitings returned by API
+    App.pageSizes = [25,50,75,100];
+
+
+
+    // Setup API instance config
+    // =================================================================
+
+    var Api = {
+        meta: {}
+    ,   Routes: {}
+    };
+
+    Api.meta.docsPath               = 'https://path.to/our/api/docs/specs';
+    Api.meta.maxResultsLength       = 200;
+    Api.meta.defaultResultsLength   = 50;
+
+
+    // setup API routes
+    Api.Routes.businesses = '/businesses'
+
+    // setup Axios default parameters
     axios.defaults.baseURL = 'http://localhost:8080/api/';
 
 
-    // register routes and their handlers
+
+    // Setup localStorage helper and default runtime properties
+    // =================================================================
+
+    // expose a window global for console testing
+    var localStorage = window.ls = require('./local-storage.js');
+
+
+    // default per_page parameter if not already set
+    if (!localStorage('per_page')) {
+        localStorage('per_page', Api.meta.defaultResultsLength);
+
+    // validate that per_page is set to a maxium value per our API spec
+    } else {
+        if (localStorage('per_page') > Api.meta.maxResultsLength) {
+            localStorage('per_page', Api.meta.maxResultsLength);
+            console.warn('Property `per_page` must be no larger than 200 per API spec:', Api.meta.docsPath);
+        }
+    }
+
+
+
+    // Setup event bus and handlers
+    // =================================================================
+
+    var $doc = $(document);
+
+    //
+    $doc.on('render', function(e, data) {
+
+        var model       = data.model;
+        var url         = data.url;
+        var template    = data.template;
+
+        console.log(e, data);
+
+        // if we've cached the API result already, load it
+        if (localStorage(url)) {
+            model = _.merge(localStorage(url), model);
+            App.$container.html(template(model));
+
+        // otherwise get the API data
+        } else {
+            axios.get(url)
+                .then(function(res) {
+                    model = _.merge({model: model}, res.data);
+                    localStorage(url, model);
+                    App.$container.html(template(model));
+                })
+            ;
+        }
+    });
+
+
+    // setup handler for changing the page size property
+    $doc.on('change', '[role="pageSizeControl"]', function(e, data) {
+        localStorage('per_page', e.target.value);
+    });
+
+
+
+    // Register routes and their handlers
+    // =================================================================
+
     // @sauce: https://visionmedia.github.io/page.js/
     // @sauce: http://smalljs.org/client-side-routing/page/
-
 
     /**
      * HOME PAGE HANDLER
@@ -52,7 +143,7 @@ $(document).ready(function() {
 
         // };
 
-        // app.$container.html(template(model));
+        // App.$container.html(template(model));
 
     });
 
@@ -67,37 +158,46 @@ $(document).ready(function() {
         console.debug('business list page');
 
         var params      = ctx.params
-        ,   url         = '/businesses/'
+        ,   url         = Api.Routes.businesses
         ,   template    = Handlebars.templates['business-listing']
         ,   model       = {}
         ;
 
-
-        // if we're on a paged resource
-        if (params.index && params.index !== "0") {
-            url += '?page=' + params.index;
-
-        }
+        model.per_page = params.per_page = localStorage('per_page');
 
 
-        // if we've cached the API result already, load it
-        if (localStorage(url)) {
-            app.$container.html(template(localStorage(url)));
+        // establish page sizes and ensure they're sorted accordingly
+        model.pageSizes = App.pageSizes.sort(function(a, b) { return a - b; });
 
-        // otherwise get the API data
-        } else {
-            axios.get(url)
-                .then(function(res) {
-                    localStorage(url, res.data);
-                    app.$container.html(template(res.data));
-                })
-            ;
-        }
+        // setup a paged route regardless so we can cache things more accurately
+        url += encodeURIComponent('?' + _.serialize(params, '&'));
 
+
+        $doc.trigger('render', {
+            model: model
+        ,   template: template
+        ,   url: url
+        });
+
+        // // if we've cached the API result already, load it
+        // if (localStorage(url)) {
+        //     model = _.merge(localStorage(url), model);
+        //     App.$container.html(template(model));
+
+        // // otherwise get the API data
+        // } else {
+        //     axios.get(url)
+        //         .then(function(res) {
+        //             model = _.merge({model: model}, res.data);
+        //             localStorage(url, model);
+        //             App.$container.html(template(model));
+        //         })
+        //     ;
+        // }
     };
 
     page('/businesses', businessHandler);
-    page('/businesses/page/:index', businessHandler);
+    page('/businesses/page/:page', businessHandler);
 
 
 
@@ -110,18 +210,18 @@ $(document).ready(function() {
         console.debug('business profile page');
 
         var params      = ctx.params
-        ,   url         = '/businesses/' + params.id
+        ,   url         = [Api.Routes.businesses, params.id].join('/')
         ,   template    = Handlebars.templates['business-profile']
         ;
 
         if (localStorage(url)) {
-            app.$container.html(template(localStorage(url)));
+            App.$container.html(template(localStorage(url)));
 
         } else {
             axios.get(url)
                 .then(function(res) {
                     localStorage(url, res.data);
-                    app.$container.html(template(res.data));
+                    App.$container.html(template(res.data));
                 })
             ;
         }
@@ -138,4 +238,7 @@ $(document).ready(function() {
     page.start();
 
 
-});
+})();
+
+
+// businesses?page=10&per_page=50

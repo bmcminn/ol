@@ -1,4 +1,4 @@
-var Handlebars = require("handlebars/runtime");  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+var Handlebars = require("./handlebars.js");  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['business-listing'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -10,12 +10,12 @@ templates['business-listing'] = template({"1":function(container,depth0,helpers,
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "Business Listings\r\n\r\n"
-    + ((stack1 = container.invokePartial(partials.pagination,depth0,{"name":"pagination","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+  return "<h1>Business Listings</h1>\r\n\r\n"
+    + ((stack1 = container.invokePartial(partials.pagination,depth0,{"name":"pagination","hash":{"per_page":((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.per_page : stack1)},"data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
     + "\r\n<ul>\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.businesses : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</ul>\r\n\r\n"
-    + ((stack1 = container.invokePartial(partials.pagination,depth0,{"name":"pagination","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + ((stack1 = container.invokePartial(partials.pagination,depth0,{"name":"pagination","hash":{"per_page":((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.per_page : stack1)},"data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
     + "\r\n";
 },"usePartial":true,"useData":true});
 templates['business-profile'] = template({"1":function(container,depth0,helpers,partials,data) {
@@ -71,28 +71,42 @@ templates['business-profile'] = template({"1":function(container,depth0,helpers,
 templates['home'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "        Homepage\r\n";
 },"useData":true});
-templates['pagination'] = template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.pages : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"2":function(container,depth0,helpers,partials,data) {
+templates['pagination'] = template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 
-  return "        <nav role=\"pagination\">\r\n            "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.first : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n\r\n\r\n\r\n            "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.last : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n        </nav>\r\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "<a href=\"/businesses/page/1\">First</a>";
+  return "    <section class=\"pagination\">\r\n\r\n        <div>\r\n            <label for=\"\"></label>\r\n            <select name=\"\" id=\"\" action=\"pageSizeControl\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.pageSizes : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "            </select>\r\n        </div>\r\n\r\n        <nav role=\"pagination\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.pages : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "        </nav>\r\n\r\n    </section>\r\n";
+},"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "                    <option value=\""
+    + alias2(alias1(depth0, depth0))
+    + "\" "
+    + ((stack1 = (helpers.eqSelected || (depth0 && depth0.eqSelected) || helpers.helperMissing).call(depth0 != null ? depth0 : {},depth0,(depths[1] != null ? depths[1].per_page : depths[1]),{"name":"eqSelected","hash":{},"data":data})) != null ? stack1 : "")
+    + ">"
+    + alias2(alias1(depth0, depth0))
+    + "</option>\r\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : {};
+
+  return "                "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.first : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n\r\n\r\n\r\n                "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.last : depth0),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
+    return "<a href=\"/businesses/page/1\">First</a>";
+},"7":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "<a href=\"/businesses/page/"
     + container.escapeExpression(((helper = (helper = helpers.lastIndex || (depth0 != null ? depth0.lastIndex : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"lastIndex","hash":{},"data":data}) : helper)))
     + "\">Last</a>";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
-  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.pages : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"useData":true});
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.pages : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"useData":true,"useDepths":true});

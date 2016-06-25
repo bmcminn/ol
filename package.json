@@ -8,7 +8,7 @@
     "serve": "node bin/serve --spa",
     "build": "webpack",
     "css": "stylus src/stylus/main.styl -o public/css/main.css",
-    "templates": "handlebars ./views -f ./src/js/template-files.js -c handlebars/runtime -e hbs",
+    "templates": "handlebars ./views -f ./src/js/template-files.js -c ./handlebars.js -e hbs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm-scripts-watcher"
   },

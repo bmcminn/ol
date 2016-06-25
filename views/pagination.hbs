@@ -1,11 +1,24 @@
 {{#if pages }}
-    {{#each pages}}
+    <section class="pagination">
+
+        <div>
+            <label for=""></label>
+            <select name="" id="" action="pageSizeControl">
+                {{#each model.pageSizes }}
+                    <option value="{{ . }}" {{{eqSelected . ../per_page }}}>{{ . }}</option>
+                {{/each}}
+            </select>
+        </div>
+
         <nav role="pagination">
-            {{#if first}}<a href="/businesses/page/1">First</a>{{/if}}
+            {{#each pages}}
+                {{#if first}}<a href="/businesses/page/1">First</a>{{/if}}
 
 
 
-            {{#if last}}<a href="/businesses/page/{{ lastIndex }}">Last</a>{{/if}}
+                {{#if last}}<a href="/businesses/page/{{ lastIndex }}">Last</a>{{/if}}
+            {{/each}}
         </nav>
-    {{/each}}
+
+    </section>
 {{/if}}

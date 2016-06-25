@@ -50,6 +50,8 @@ console.log(`Serving "/public" at http://${serverConfig.hostname}:${serverConfig
 
 require('http').createServer(function (request, response) {
 
+    console.log('____URL____:', request.url);
+
     if (process.env.USE_API_PROXY === false && request.url.match(/\/api\//i)) {
         console.log("Since you're not using the API proxy, you should probably change the `axios.defaults.baseURL` variable in `src/main.js`");
         return;
@@ -58,7 +60,7 @@ require('http').createServer(function (request, response) {
     // setup a proxy for the API calls
     if (process.env.USE_API_PROXY && request.url.match(/\/api\//i)) {
 
-        var route = url.parse(request.url);
+        var route = url.parse(decodeURIComponent(request.url));
         route.path = route.path.replace(/^\/api/, '');
 
         var apiRoute = url.resolve(api.url, route.path);
@@ -66,7 +68,7 @@ require('http').createServer(function (request, response) {
         console.log(apiRoute);
 
         // execute a curl command to proxy this stuff
-        var res = execSync('curl ' + apiRoute, { encoding: 'utf8' });
+        var res = execSync(`curl "${apiRoute}"`, { encoding: 'utf8' });
 
         // write the response back to client
         response.write(res);
