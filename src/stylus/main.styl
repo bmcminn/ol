@@ -20,9 +20,87 @@ $maroon         = #85144b
 // Gray Scale
 $white          = #fff
 $silver         = #ddd
+$platinum       = lighten($silver, 70%)
 $gray           = #aaa
 $black          = #353535
 
 
 @import "_normalize"
+@import "schema/index"
+@import "_fontawesome"
 
+
+
+// LAYOUT
+.wrapper
+    padding-top: 5rem
+
+
+
+// NAVIGATION
+.nav
+    position: fixed
+    top: 0
+    width: 100%
+    box-shadow: 0 0 5px rgba(0,0,0,.2)
+    padding: 0.6rem 0
+
+
+
+// BRAND
+.brand
+    font-size: 1.5rem
+    font-weight: bold
+
+    a
+        padding: 0.2rem 0 0.5rem
+
+        > span
+            color: $blue
+
+
+
+// LISTINGS
+[role="listings"]
+    > li
+        padding: 0.7rem 0.8rem
+
+        *
+            vertical-align: text-top
+
+        &:nth-child(odd)
+            background: $platinum
+
+
+
+// BUSINESS PROFILE
+
+img
+    display: inline-block
+    width: 100%
+
+
+
+
+// TYPOGRAPHY
+.text-right
+    float: right
+
+.text-center
+    text-align: center
+
+
+
+// PAGINATION
+
+
+
+
+// FOOTER
+footer
+    text-align: center
+    padding: 2rem 0
+    margin: 4rem 0 0
+    top: auto
+    bottom: 0
+    background-color: $platinum

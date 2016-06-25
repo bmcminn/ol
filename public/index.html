@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
 
     <title>Document</title>
 
@@ -11,16 +12,34 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+    <main class="wrapper">
 
-    <header>
-        <a href="/">Home</a>
-        <nav>
-            <a href="/businesses" class="btn" action="navigation">Business listings</a>
-        </nav>
-    </header>
+        <header class="nav">
+            <div class="container">
+                <div class="row-fluid">
+                    <div class="brand">
+                        <a href="/">Pro<span>List</span></a>
+                    </div>
+                    <nav class="right-float">
+                        <a href="/businesses" class="btn" action="navigation">Business listings</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
 
 
-    <div role="app"></div>
+        <div class="container">
+            <div role="app"></div>
+        </div>
+
+
+        <footer>
+            <div class="container">
+                Copyright &copy; <span date="year"></span> &ndash; ProList
+            </div>
+        </footer>
+
+    </main>
 
 
     <script src="/build/common.js"></script>

@@ -1,0 +1,119 @@
+//------------------------------------\\
+//
+//       @Tables
+//
+//------------------------------------//
+.table
+    width: 100%
+    max-width: 100%
+    border-spacing: 0
+    border-collapse: collapse
+    display: table
+    -webkit-transition: all 0.25s ease
+    -moz-transition: all 0.25s ease
+    transition: all 0.25s ease
+    color: #777777
+
+.table-bordered
+    border: 1px solid #cccccc
+
+.table-stripe > tbody > tr:nth-child(odd) > td
+    background-color: #f9f9f9
+
+.table-stripe.table-bordered > thead > tr > th
+    background-color: $white
+
+.table.table-condensed > thead > tr > th,
+.table.table-condensed > tbody > tr > td
+    padding-top: 0.41666667rem
+    padding-bottom: 0.41666667rem
+    padding-left: 0.66666667rem
+    padding-right: 0.66666667rem
+
+@media screen and (max-width: 47.9375rem)
+    .responsive-table
+        width: 100%
+        overflow-x: auto
+        overflow-y: hidden
+        -webkit-overflow-scrolling: touch
+        -ms-overflow-style: -ms-autohiding-scrollbar
+        border: 1px solid #dddddd
+
+
+.table > tr
+    display: table-row
+    vertical-align: inherit
+    border-color: inherit
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > td
+    border: 1px solid #cccccc
+
+.table-bordered > thead > tr > th
+    background-color: #f9f9f9
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.92)
+
+.table > thead > tr > th
+    vertical-align: bottom
+    border-bottom: 2px solid #cccccc
+    color: #555555
+
+.table-bordered > thead > tr > th
+    border-bottom-width: 1px
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td
+    padding: 0.75rem
+    line-height: 1.3125
+    vertical-align: middle
+    border-top: 1px solid #cccccc
+    text-align: left
+
+.table-hover > tbody > tr:hover,
+.table-hover > tfoot > tr:hover,
+.table-hover > thead > tr:hover > td,
+.table-hover > tbody > tr:hover > td,
+.table-hover > tfoot > tr:hover > td,
+.table-hover > tbody > tr > td:hover,
+.table-hover > tfoot > tr > td:hover
+    background-color: #f9f9f9
+    -webkit-transition: all 0.25s ease
+    -moz-transition: all 0.25s ease
+    transition: all 0.25s ease
+
+.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td
+    border-top: 0
+
+.table > tbody > tr.is-primary > td,
+.table > tbody > tr:hover.is-primary > td
+    background-color: #eaf4fb
+    color: #196090
+
+.table > tbody > tr.is-success > td,
+.table > tbody > tr:hover.is-success > td
+    background-color: #e2f8eb
+    color: #1b7943
+
+.table > tbody > tr.is-info > td,
+.table > tbody > tr:hover.is-info > td
+    background-color: #d7f8f5
+    color: #15736b
+
+.table > tbody > tr.is-warning > td,
+.table > tbody > tr:hover.is-warning > td
+    background-color: #fef5e8
+    color: #976008
+
+.table > tbody > tr.is-danger > td,
+.table > tbody > tr:hover.is-danger > td
+    background-color: #fef5f4
+    color: #d62c1a

@@ -1,0 +1,132 @@
+
+//------------------------------------\\
+//
+//       @Helper Classes
+//
+//------------------------------------//
+.no-b
+    border-color: transparent
+    border: none
+
+.hide-text
+    font: 0/0
+    color: transparent
+    text-shadow: none
+    background-color: transparent
+    border: 0
+
+.is-disabled,
+.disabled
+    pointer-events: none
+    opacity: .45
+    cursor: not-allowed
+
+.left-float
+    float: left
+
+.right-float
+    float: right
+
+.center-float
+    margin: 0 auto
+
+.no-float
+    float: none
+
+.text-left
+    text-align: left
+
+.text-right
+    text-align: right
+
+.text-center
+    text-align: center
+
+.justified
+    text-align: justify
+
+@media screen and (min-width: 75rem)
+    .desktop-hidden
+        visibility: hidden
+        display: none
+
+
+@media screen and (min-width: 48rem) and (max-width: 61.1875rem)
+    .tablet-hidden
+        visibility: hidden
+        display: none
+
+
+@media screen and (max-width: 47.9375rem)
+    .mobile-hidden
+        visibility: hidden
+        display: none
+
+
+@media screen and (max-width: 47.9375rem)
+    .show-mobile
+        visibility: visible
+        display: block
+
+
+.show-mobile
+    display: none
+    visibility: hidden
+
+@media screen and (max-width: 47.9375rem)
+    .show-mobile
+        display: block
+        visibility: visible
+
+
+.show-tablet
+    display: none
+    visibility: hidden
+
+@media screen and (min-width: 48rem) and (max-width: 61.1875rem)
+    .show-tablet
+        display: block
+        visibility: visible
+
+
+.show-desktop
+    display: none
+    visibility: hidden
+
+@media screen and (min-width: 75rem)
+    .show-desktop
+        display: block
+        visibility: visible
+
+
+.hide
+    visibility: hidden
+    display: none
+    opacity: 0
+    -webkit-transition: opacity 0.45s linear
+    -moz-transition: opacity 0.45s linear
+    transition: opacity 0.45s linear
+
+.fade
+    opacity: 0
+    -webkit-transition: opacity 0.45s linear
+    -moz-transition: opacity 0.45s linear
+    transition: opacity 0.45s linear
+
+.fade.in
+    opacity: 1
+
+.has-success
+    color: #2ecc71
+
+.has-primary
+    color: #3498db
+
+.has-info
+    color: #24cabc
+
+.has-warning
+    color: #f39c12
+
+.has-danger
+    color: #e74c3c
