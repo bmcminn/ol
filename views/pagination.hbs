@@ -2,8 +2,8 @@
     <section class="pagination">
 
         <div>
-            <label for=""></label>
-            <select name="" id="" action="pageSizeControl">
+            <label for="pageSizeControl">Page size</label>
+            <select name="pageSizeControl" id="" action="pageSizeControl">
                 {{#each model.pageSizes }}
                     <option value="{{ . }}" {{{eqSelected . ../per_page }}}>{{ . }}</option>
                 {{/each}}

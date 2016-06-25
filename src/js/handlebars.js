@@ -24,5 +24,13 @@ Handlebars.registerHelper('encodeURI', function(string) {
 });
 
 
+Handlebars.registerHelper('phoneUS', function(string) {
+    return string
+        .replace(/^(\d{3})/, '+1 ($1) ')
+        .replace(/(\d{4})$/, '-$1')
+        ;
+});
+
+
 
 module.exports = Handlebars;

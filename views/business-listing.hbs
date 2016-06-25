@@ -1,12 +1,21 @@
 <h1>Business Listings</h1>
 
+<hr>
+
 {{> pagination per_page=model.per_page }}
 
-<ul>
+<hr>
+
+<ul role="listings">
 {{#each businesses}}
-    <li><a href="/businesses/{{ id }}">{{ name }}</a></li>
+    <li class="">
+        <a class="" href="/businesses/{{ id }}">{{ name }}</a>
+        <span class="text-right">{{ city }}, {{ state }}</span>
+    </li>
 {{/each}}
 </ul>
+
+<hr>
 
 {{> pagination per_page=model.per_page }}
 

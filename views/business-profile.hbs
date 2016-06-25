@@ -1,35 +1,47 @@
+
+<nav class="breadcrumb">
+    <a href="/businesses/{{ page }}">&lt; Businesses</a>
+</nav>
+
+<hr>
+
 <h1>{{ name }}</h1>
 
-<h2>Location</h2>
+<div class="row-fluid">
 
-<dl>
-{{#if website}}
-    <dt>Website</dt>
-    <dd>
-        <a href="{{ website }}" class="fa-web">{{ website }}</a>
-    </dd>
-{{/if}}
+    <dl class="col5">
+    {{#if website}}
+        <dt>Website</dt>
+        <dd>
+            <a href="{{ website }}" class="fa-web">{{ website }}</a>
+        </dd>
+    {{/if}}
 
 
-{{#if phone}}
-    <dt>Phone</dt>
-    <dd>
-        <a href="tel:{{ phone }}" class="fa-phone">{{ phone }}</a>
-    </dd>
-{{/if}}
+    {{#if phone}}
+        <dt>Phone</dt>
+        <dd>
+            <a href="tel:{{phoneUS phone }}" class="fa-phone">{{phoneUS phone }}</a>
+        </dd>
+    {{/if}}
 
-{{#if address}}
-    <dt>Address</dt>
-    <dd>
-        <address>
-            {{ address }}<br>
-            {{#if address2 }}{{ address2 }}<br>{{/if}}
-            {{ city }}, {{ state }} {{ zip }}<br>
-            {{ country }}
-        </address>
+    {{#if address}}
+        <dt>Address</dt>
+        <dd>
+            <address>
+                {{ address }}<br>
+                {{#if address2 }}{{ address2 }}<br>{{/if}}
+                {{ city }}, {{ state }} {{ zip }}<br>
+                {{ country }}
+            </address>
+        </dd>
+    {{/if}}
+    </dl>
 
+
+
+    <div class="col7 text-center">
         {{> maps }}
+    </div>
 
-    </dd>
-{{/if}}
-</dl>
+</div>

@@ -90,25 +90,43 @@ window.$ = $;
     // setup render
     $doc.on('render', renderFile = function(e, data) {
 
+        data = _.extend({
+            $el:        App.$container
+        ,   model:      {}
+        ,   template:   null
+        ,   url:        null
+        }, data);
+
+
         var $el         = data.$el
         var model       = data.model;
         var url         = data.url;
         var template    = data.template;
 
-        // if we've cached the API result already, load it
-        if (localStorage(url)) {
-            model = _.merge(localStorage(url), model);
+
+        // if we're targeting a URL to pull data for our view
+        if (url) {
+
+            // if we've cached the API result already, load it
+            if (localStorage(url)) {
+                model = _.merge(localStorage(url), model);
+                $el.html(template(model));
+
+            // otherwise get the API data
+            } else {
+                axios.get(url)
+                    .then(function(res) {
+                        model = _.merge({model: model}, res.data);
+                        localStorage(url, model);
+                        $el.html(template(model));
+                    })
+                ;
+            }
+
+        // render the view anyway
+        } else {
             $el.html(template(model));
 
-        // otherwise get the API data
-        } else {
-            axios.get(url)
-                .then(function(res) {
-                    model = _.merge({model: model}, res.data);
-                    localStorage(url, model);
-                    $el.html(template(model));
-                })
-            ;
         }
     });
 
@@ -137,15 +155,20 @@ window.$ = $;
 
         console.debug('homepage');
 
-        // var params      = ctx.params
-        // ,   template    = Handlebars.templates['business-listing']
-        // ;
+        var template    = Handlebars.templates['home']
+        ;
 
-        // var model = {
+        var model = {
 
-        // };
+        };
 
-        // App.$container.html(template(model));
+
+        // render the view
+        $doc.trigger('render', {
+            $el:        App.$container
+        ,   model:      model
+        ,   template:   template
+        });
 
     });
 
@@ -201,7 +224,7 @@ window.$ = $;
         ,   template    = Handlebars.templates['business-profile']
         ;
 
-        model = {};
+        var model = {};
 
         // render the view
         $doc.trigger('render', {
@@ -216,6 +239,14 @@ window.$ = $;
 
     // initialize page() instance
     page.start();
+
+
+
+
+    // run misc UI features
+    d = new Date();
+    $('[date="year"]').text(d.getFullYear());
+
 
 
 })();
