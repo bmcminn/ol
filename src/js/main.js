@@ -87,9 +87,10 @@ window.$ = $;
 
     var $doc = $(document);
 
-    //
+    // setup render
     $doc.on('render', function(e, data) {
 
+        var $el         = data.el
         var model       = data.model;
         var url         = data.url;
         var template    = data.template;
@@ -99,7 +100,7 @@ window.$ = $;
         // if we've cached the API result already, load it
         if (localStorage(url)) {
             model = _.merge(localStorage(url), model);
-            App.$container.html(template(model));
+            $el.html(template(model));
 
         // otherwise get the API data
         } else {
@@ -107,7 +108,7 @@ window.$ = $;
                 .then(function(res) {
                     model = _.merge({model: model}, res.data);
                     localStorage(url, model);
-                    App.$container.html(template(model));
+                    $el.html(template(model));
                 })
             ;
         }
@@ -173,27 +174,14 @@ window.$ = $;
         url += encodeURIComponent('?' + _.serialize(params, '&'));
 
 
+        // render the view
         $doc.trigger('render', {
-            model: model
-        ,   template: template
-        ,   url: url
+            $el:        App.$container
+        ,   model:      model
+        ,   template:   template
+        ,   url:        url
         });
 
-        // // if we've cached the API result already, load it
-        // if (localStorage(url)) {
-        //     model = _.merge(localStorage(url), model);
-        //     App.$container.html(template(model));
-
-        // // otherwise get the API data
-        // } else {
-        //     axios.get(url)
-        //         .then(function(res) {
-        //             model = _.merge({model: model}, res.data);
-        //             localStorage(url, model);
-        //             App.$container.html(template(model));
-        //         })
-        //     ;
-        // }
     };
 
     page('/businesses', businessHandler);
@@ -214,17 +202,13 @@ window.$ = $;
         ,   template    = Handlebars.templates['business-profile']
         ;
 
-        if (localStorage(url)) {
-            App.$container.html(template(localStorage(url)));
-
-        } else {
-            axios.get(url)
-                .then(function(res) {
-                    localStorage(url, res.data);
-                    App.$container.html(template(res.data));
-                })
-            ;
-        }
+        // render the view
+        $doc.trigger('render', {
+            $el:        App.$container
+        ,   model:      model
+        ,   template:   template
+        ,   url:        url
+        });
 
     });
 
