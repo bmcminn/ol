@@ -90,7 +90,8 @@ window.$ = $;
     // setup render
     $doc.on('render', renderFile = function(e, data) {
 
-        data = _.extend({
+        // normalize our model data
+        data = _.merge({
             $el:        App.$container
         ,   model:      {}
         ,   template:   null
@@ -98,6 +99,7 @@ window.$ = $;
         }, data);
 
 
+        // create aliases to our model properties
         var $el         = data.$el
         var model       = data.model;
         var url         = data.url;

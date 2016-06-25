@@ -32,5 +32,14 @@ Handlebars.registerHelper('phoneUS', function(string) {
 });
 
 
+Handlebars.registerHelper('pagination', function(pages) {
+
+
+
+    console.log(pages);
+
+});
+
+
 
 module.exports = Handlebars;

@@ -99,11 +99,13 @@ templates['maps'] = template({"compiler":[7,">= 4.0.0"],"main":function(containe
 templates['pagination'] = template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 
-  return "    <section class=\"pagination\">\r\n\r\n        <div>\r\n            <label for=\"pageSizeControl\">Page size</label>\r\n            <select name=\"pageSizeControl\" id=\"\" action=\"pageSizeControl\">\r\n"
+  return "    <section class=\"pagination fluid-row clearfix\">\r\n\r\n        <div class=\"col3\">\r\n            <label for=\"pageSizeControl\">Page size</label>\r\n            <select name=\"pageSizeControl\" id=\"\" action=\"pageSizeControl\">\r\n"
     + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.model : depth0)) != null ? stack1.pageSizes : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "            </select>\r\n        </div>\r\n\r\n        <nav role=\"pagination\">\r\n"
+    + "            </select>\r\n        </div>\r\n\r\n        <nav class=\"col6\" role=\"pagination\">\r\n            <div class=\"pagination no-b\">\r\n                <ul>\r\n                    <li><a href=\"#\" class=\"btn btn-default\">«</a></li>\r\n                    <li><a href=\"#\" class=\"btn btn-default\">1</a></li>\r\n                    <li><a href=\"#\" class=\"btn btn-default\">2</a></li>\r\n                    <li><a href=\"#\" class=\"btn btn-default active\">3</a></li>\r\n                    <li><a href=\"#\" class=\"btn btn-default\">4</a></li>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.pages : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </nav>\r\n\r\n    </section>\r\n";
+    + "                    <li><a href=\"#\" class=\"btn btn-default\">5</a></li>\r\n                    <li><a href=\"#\" class=\"btn btn-default\">6</a></li>\r\n                    <li><a href=\"#\" class=\"btn btn-default\">»</a></li>\r\n                </ul>\r\n            </div>\r\n            "
+    + container.escapeExpression((helpers.pagination || (depth0 && depth0.pagination) || helpers.helperMissing).call(alias1,(depth0 != null ? depth0.pages : depth0),{"name":"pagination","hash":{},"data":data}))
+    + "\r\n        </nav>\r\n\r\n    </section>\r\n";
 },"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
@@ -115,21 +117,7 @@ templates['pagination'] = template({"1":function(container,depth0,helpers,partia
     + alias2(alias1(depth0, depth0))
     + "</option>\r\n";
 },"4":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : {};
-
-  return "                "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.first : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n\r\n\r\n\r\n                "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.last : depth0),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    return "<a href=\"/businesses/page/1\">First</a>";
-},"7":function(container,depth0,helpers,partials,data) {
-    var helper;
-
-  return "<a href=\"/businesses/page/"
-    + container.escapeExpression(((helper = (helper = helpers.lastIndex || (depth0 != null ? depth0.lastIndex : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"lastIndex","hash":{},"data":data}) : helper)))
-    + "\">Last</a>";
+    return "                    <li><a href=\"#\" class=\"btn btn-default\">6</a></li>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 

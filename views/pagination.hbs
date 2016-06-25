@@ -1,7 +1,7 @@
 {{#if pages }}
-    <section class="pagination">
+    <section class="pagination fluid-row clearfix">
 
-        <div>
+        <div class="col3">
             <label for="pageSizeControl">Page size</label>
             <select name="pageSizeControl" id="" action="pageSizeControl">
                 {{#each model.pageSizes }}
@@ -10,14 +10,23 @@
             </select>
         </div>
 
-        <nav role="pagination">
-            {{#each pages}}
-                {{#if first}}<a href="/businesses/page/1">First</a>{{/if}}
-
-
-
-                {{#if last}}<a href="/businesses/page/{{ lastIndex }}">Last</a>{{/if}}
-            {{/each}}
+        <nav class="col6" role="pagination">
+            <div class="pagination no-b">
+                <ul>
+                    <li><a href="#" class="btn btn-default">«</a></li>
+                    <li><a href="#" class="btn btn-default">1</a></li>
+                    <li><a href="#" class="btn btn-default">2</a></li>
+                    <li><a href="#" class="btn btn-default active">3</a></li>
+                    <li><a href="#" class="btn btn-default">4</a></li>
+                {{#each pages }}
+                    <li><a href="#" class="btn btn-default">6</a></li>
+                {{/each}}
+                    <li><a href="#" class="btn btn-default">5</a></li>
+                    <li><a href="#" class="btn btn-default">6</a></li>
+                    <li><a href="#" class="btn btn-default">»</a></li>
+                </ul>
+            </div>
+            {{pagination pages }}
         </nav>
 
     </section>
