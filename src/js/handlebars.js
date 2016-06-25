@@ -6,11 +6,8 @@ var Handlebars = require('handlebars/runtime');
 Handlebars.registerHelper('eqSelected', function(a, b) {
     var radix = 10;
 
-    console.log(a, b);
     a = parseInt(a, radix);
     b = parseInt(b, radix);
-
-    console.log('eqSelected', a, b);
 
     if (a === b) {
         return 'selected'
@@ -18,6 +15,14 @@ Handlebars.registerHelper('eqSelected', function(a, b) {
         return '';
     }
 });
+
+
+Handlebars.registerHelper('encodeURI', function(string) {
+    return string
+        .replace(/\s/g, '+')
+        ;
+});
+
 
 
 module.exports = Handlebars;

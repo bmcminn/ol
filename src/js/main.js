@@ -88,14 +88,12 @@ window.$ = $;
     var $doc = $(document);
 
     // setup render
-    $doc.on('render', function(e, data) {
+    $doc.on('render', renderFile = function(e, data) {
 
-        var $el         = data.el
+        var $el         = data.$el
         var model       = data.model;
         var url         = data.url;
         var template    = data.template;
-
-        console.log(e, data);
 
         // if we've cached the API result already, load it
         if (localStorage(url)) {
@@ -116,9 +114,12 @@ window.$ = $;
 
 
     // setup handler for changing the page size property
-    $doc.on('change', '[role="pageSizeControl"]', function(e, data) {
+    $doc.on('change', '[action="pageSizeControl"]', function(e, data) {
         localStorage('per_page', e.target.value);
+        page(window.location.pathname);
     });
+
+
 
 
 
@@ -128,10 +129,10 @@ window.$ = $;
     // @sauce: https://visionmedia.github.io/page.js/
     // @sauce: http://smalljs.org/client-side-routing/page/
 
-    /**
-     * HOME PAGE HANDLER
-     * @param  {[type]} ctx) {                   var params [description]
-     */
+
+    // HOME PAGE HANDLER
+    // -----------------------------------------------------------------
+
     page('/', function(ctx) {
 
         console.debug('homepage');
@@ -150,10 +151,9 @@ window.$ = $;
 
 
 
-    /**
-     * BUSINESS LISTING HANDLER
-     * @param  {[type]} ctx [description]
-     */
+    // BUSINESS LISTING HANDLER
+    // -----------------------------------------------------------------
+
     var businessHandler = function(ctx) {
 
         console.debug('business list page');
@@ -189,11 +189,10 @@ window.$ = $;
 
 
 
-    /**
-     * BUSINESS PROFILE HANDLER
-     * @param  {[type]} ctx) {                   var params [description]
-     */
-    page('/businesses/:id', function(ctx) {
+    // BUSINESS PROFILE HANDLER
+    // -----------------------------------------------------------------
+
+    page('/businesses/:id', businessProfileHandler = function(ctx) {
 
         console.debug('business profile page');
 
@@ -201,6 +200,8 @@ window.$ = $;
         ,   url         = [Api.Routes.businesses, params.id].join('/')
         ,   template    = Handlebars.templates['business-profile']
         ;
+
+        model = {};
 
         // render the view
         $doc.trigger('render', {
@@ -213,16 +214,8 @@ window.$ = $;
     });
 
 
-
-    // on page (re)load, trigger the route in question + any query parameters
-    // page(window.location.pathname + window.location.search);
-
-
-    // configure page() instance
+    // initialize page() instance
     page.start();
 
 
 })();
-
-
-// businesses?page=10&per_page=50
