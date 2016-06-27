@@ -1,6 +1,7 @@
 
 <nav class="breadcrumb">
-    <a href="/businesses/{{ page }}">&lt; Businesses</a>
+    <a class="btn btn-link" href="/businesses/page/{{ page }}"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</a> /
+    <a class="btn disabled">{{ name }}</a>
 </nav>
 
 <hr>
@@ -8,39 +9,42 @@
 <h1>{{ name }}</h1>
 
 <div class="row-fluid">
-
-    <dl class="col5">
-    {{#if website}}
-        <dt>Website</dt>
-        <dd>
-            <a href="{{ website }}" class="fa-web">{{ website }}</a>
-        </dd>
-    {{/if}}
-
-
-    {{#if phone}}
-        <dt>Phone</dt>
-        <dd>
-            <a href="tel:{{phoneUS phone }}" class="fa-phone">{{phoneUS phone }}</a>
-        </dd>
-    {{/if}}
-
-    {{#if address}}
-        <dt>Address</dt>
-        <dd>
-            <address>
-                {{ address }}<br>
-                {{#if address2 }}{{ address2 }}<br>{{/if}}
-                {{ city }}, {{ state }} {{ zip }}<br>
-                {{ country }}
-            </address>
-        </dd>
-    {{/if}}
-    </dl>
+    <div class="col6">
+        <table class="table">
+            {{#if website}}
+                <tr>
+                    <td><strong>Website</strong></td>
+                    <td><a href="{{ website }}">{{ website }}</a></td>
+                </tr>
+            {{/if}}
 
 
+            {{#if phone}}
+                <tr>
+                    <td><strong>Phone</strong></td>
+                    <td><a href="tel:{{phoneUS phone }}">{{phoneUS phone }}</a></td>
+                </tr>
+            {{/if}}
 
-    <div class="col7 text-center">
+            {{#if address}}
+                <tr>
+                    <td><strong>Address</strong></td>
+                    <td>
+                        <address>
+                            {{ address }}<br>
+                            {{#if address2 }}{{ address2 }}<br>{{/if}}
+                            {{ city }}, {{ state }} {{ zip }}<br>
+                            {{ country }}
+                        </address>
+                    </td>
+                </tr>
+            {{/if}}
+        </table>
+    </div>
+
+
+
+    <div class="col6 text-center">
         {{> maps }}
     </div>
 

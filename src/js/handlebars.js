@@ -6,6 +6,8 @@ var Handlebars = require('handlebars/runtime');
 Handlebars.registerHelper('eqSelected', function(a, b) {
     var radix = 10;
 
+    console.log('a', a, ': b', b)
+
     a = parseInt(a, radix);
     b = parseInt(b, radix);
 
@@ -30,16 +32,6 @@ Handlebars.registerHelper('phoneUS', function(string) {
         .replace(/(\d{4})$/, '-$1')
         ;
 });
-
-
-Handlebars.registerHelper('pagination', function(pages) {
-
-
-
-    console.log(pages);
-
-});
-
 
 
 module.exports = Handlebars;

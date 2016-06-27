@@ -1,33 +1,55 @@
-{{#if pages }}
-    <section class="pagination fluid-row clearfix">
+<section class="pagination fluid-row clearfix">
 
-        <div class="col3">
-            <label for="pageSizeControl">Page size</label>
-            <select name="pageSizeControl" id="" action="pageSizeControl">
-                {{#each model.pageSizes }}
-                    <option value="{{ . }}" {{{eqSelected . ../per_page }}}>{{ . }}</option>
+    <div class="col3">
+        <label for="pageSizeControl">Page size</label>
+        <select name="pageSizeControl" id="" action="pageSizeControl">
+            {{#each pageSizes }}
+                <option value="{{ size }}" {{#if selected }}selected{{/if}}>{{ size }}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <nav class="col8" role="pagination">
+        <div class="pagination no-b">
+            <ul>
+                {{#if pagination.first }}
+                    <li><a href="{{ pagination.first }}" class="btn btn-default">First</a></li>
+                {{else}}
+                    <li><a class="btn btn-default disabled">First</a></li>
+                {{/if}}
+
+
+                {{#if pagination.prev }}
+                    <li><a href="{{ pagination.prev }}" class="btn btn-default"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                {{else}}
+                    <li><a class="btn btn-default disabled"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                {{/if}}
+
+
+                {{#each pagination.pages }}
+                    {{#if current }}
+                        <li><a href="{{ url }}" class="btn btn-default active">{{ index }}</a></li>
+                    {{else}}
+                        <li><a href="{{ url }}" class="btn btn-default">{{ index }}</a></li>
+                    {{/if}}
                 {{/each}}
-            </select>
+
+
+                {{#if pagination.next }}
+                    <li><a href="{{ pagination.next }}" class="btn btn-default"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                {{else}}
+                    <li><a class="btn btn-default disabled"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                {{/if}}
+
+
+                {{#if pagination.last }}
+                    <li><a href="{{ pagination.last }}" class="btn btn-default">Last</a></li>
+                {{else}}
+                    <li><a class="btn btn-default disabled">Last</a></li>
+                {{/if}}
+            </ul>
         </div>
+    </nav>
 
-        <nav class="col6" role="pagination">
-            <div class="pagination no-b">
-                <ul>
-                    <li><a href="#" class="btn btn-default">«</a></li>
-                    <li><a href="#" class="btn btn-default">1</a></li>
-                    <li><a href="#" class="btn btn-default">2</a></li>
-                    <li><a href="#" class="btn btn-default active">3</a></li>
-                    <li><a href="#" class="btn btn-default">4</a></li>
-                {{#each pages }}
-                    <li><a href="#" class="btn btn-default">6</a></li>
-                {{/each}}
-                    <li><a href="#" class="btn btn-default">5</a></li>
-                    <li><a href="#" class="btn btn-default">6</a></li>
-                    <li><a href="#" class="btn btn-default">»</a></li>
-                </ul>
-            </div>
-            {{pagination pages }}
-        </nav>
+</section>
 
-    </section>
-{{/if}}
