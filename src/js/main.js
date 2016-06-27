@@ -1,9 +1,9 @@
 /* jshint laxbreak:true, laxcomma:true */
 /* global require */
-var $       = require('./libs/jquery.js')
-,   page    = require('page.js')
-,   axios   = require('axios')
-,   _       = require('./lodash.js')
+var $           = require('./libs/jquery.js')
+,   _           = require('./lodash.js')
+,   parseQuery  = require('./parse-query.js')
+,   axios       = require('axios')
 ;
 
 // initialize window instances for client console use
@@ -153,7 +153,7 @@ window.$ = $;
     // HOME PAGE HANDLER
     // -----------------------------------------------------------------
 
-    page('/', function(ctx) {
+    App.Router('/', function(ctx) {
 
         console.debug('homepage');
 
@@ -209,15 +209,16 @@ window.$ = $;
 
     };
 
-    page('/businesses', businessHandler);
-    page('/businesses/page/:page', businessHandler);
+
+    App.Router('/businesses',             businessHandler);
+    App.Router('/businesses/page/:page',  businessHandler);
 
 
 
     // BUSINESS PROFILE HANDLER
     // -----------------------------------------------------------------
 
-    page('/businesses/:id', businessProfileHandler = function(ctx) {
+    App.Router('/businesses/:id', businessProfileHandler = function(ctx) {
 
         console.debug('business profile page');
 
@@ -239,8 +240,8 @@ window.$ = $;
     });
 
 
-    // initialize page() instance
-    page.start();
+    // initialize App.Router() instance
+    App.Router.start();
 
 
 
