@@ -29,14 +29,19 @@ window.$ = $;
     // =================================================================
 
     var App = {
-
+        Router: require('page.js')
     };
 
     App.$container  = $('[role="app"]');
 
 
     // setup page sizes list for controlling number of lsitings returned by API
-    App.pageSizes = [25,50,75,100];
+    App.pageSizes = [
+        { size: 25 }
+    ,   { size: 50 }
+    ,   { size: 75 }
+    ,   { size: 100 }
+    ];
 
 
 
@@ -81,7 +86,6 @@ window.$ = $;
     }
 
 
-
     // Setup event bus and handlers
     // =================================================================
 
@@ -96,6 +100,7 @@ window.$ = $;
         ,   model:      {}
         ,   template:   null
         ,   url:        null
+        ,   cb:         function(pageModel) { return pageModel; }
         }, data);
 
 
@@ -112,13 +117,23 @@ window.$ = $;
             // if we've cached the API result already, load it
             if (localStorage(url)) {
                 model = _.merge(localStorage(url), model);
+
+                // call all model mutation
+                model = data.cb(model);
+
+                localStorage(url, model);
+
                 $el.html(template(model));
 
             // otherwise get the API data
             } else {
                 axios.get(url)
                     .then(function(res) {
-                        model = _.merge({model: model}, res.data);
+                        model = _.merge(model, res.data);
+
+                        // call all model mutation
+                        model = data.cb(model);
+
                         localStorage(url, model);
                         $el.html(template(model));
                     })
@@ -130,13 +145,31 @@ window.$ = $;
             $el.html(template(model));
 
         }
+
+        // console.debug('model', model);
+
     });
 
 
     // setup handler for changing the page size property
     $doc.on('change', '[action="pageSizeControl"]', function(e, data) {
+        // update value of `per_page` value
         localStorage('per_page', e.target.value);
-        page(window.location.pathname);
+
+        _.each(App.pageSizes, function(value, index) {
+            App.pageSizes[index].selected = false;
+        });
+
+        // set the active page size listing to `selected`
+        var pageSize = _.findIndex(App.pageSizes, function(p) {
+            return p.size == e.target.value;
+        });
+
+        App.pageSizes[pageSize].selected = true;
+
+
+        // reset value of `page` to 1
+        App.Router.show('/businesses/page/1');
     });
 
 
@@ -158,11 +191,8 @@ window.$ = $;
         console.debug('homepage');
 
         var template    = Handlebars.templates['home']
+        ,   model       = {}
         ;
-
-        var model = {
-
-        };
 
 
         // render the view
@@ -192,6 +222,89 @@ window.$ = $;
         model.per_page = params.per_page = localStorage('per_page');
 
 
+        // set the current page we're browsing
+        if (params.page) {
+            localStorage('page', params.page)
+        } else {
+            localStorage('page', 1);
+        }
+
+        // set the page value in our model
+        model.page = localStorage('page');
+
+
+        /**
+         * Adding pagiation data to our model once it's been collected
+         * @param  {object} model Current page model data
+         * @return {object}           [description]
+         */
+        var cbPaginate = function(model) {
+
+            // setup pagination object
+            model.pagination = {
+                currentPage: parseInt(model.page, 10)
+            ,   pages: []
+            };
+
+
+            // parse pages model data
+            for (page in model.pages) {
+                var query = parseQuery(model.pages[page]);
+                model.pagination[page] = '/businesses/page/' + query.page;
+                model.pagination[page+'Index'] = parseInt(query.page, 10);
+            }
+
+
+            // Number of pages we should link to
+            var numPages = 5
+            ,   splitSize = Math.floor(numPages/2)
+            ;
+
+
+            // set starting index for page numbers in our list
+            var startIndex = 1;
+
+            // determine the lower bound of our paging range
+            if (model.pagination.currentPage - splitSize > 0) {
+                startIndex = model.pagination.currentPage - splitSize;
+            }
+
+
+            // determine the upper bound of our paging range
+            if (model.pagination.currentPage + (numPages - splitSize) > model.pagination.lastIndex + 1) {
+                startIndex = model.pagination.lastIndex + 1 - numPages;
+            }
+
+            // if we're on the last page, then model.pagination.lastIndex doesn't exist, check prevIndex in this case
+            if (!model.pagination.lastIndex && model.pagination.currentPage + (numPages - splitSize) >= model.pagination.prevIndex + 1) {
+                startIndex = model.pagination.prevIndex + 2 - numPages;
+            }
+
+
+
+            // generate pages list
+            for (var i=0; i < numPages; i++) {
+
+                var currentIndex = startIndex + i
+                ,   isCurrent = false
+                ;
+
+                if (currentIndex === model.pagination.currentPage) {
+                    isCurrent = true;
+                }
+
+                model.pagination.pages.push({
+                    index: currentIndex
+                ,   url: '/businesses/page/' + currentIndex
+                ,   current: isCurrent
+                });
+            }
+
+            // write our mutations back to the model object
+            return model;
+        }
+
+
         // establish page sizes and ensure they're sorted accordingly
         model.pageSizes = App.pageSizes.sort(function(a, b) { return a - b; });
 
@@ -205,6 +318,7 @@ window.$ = $;
         ,   model:      model
         ,   template:   template
         ,   url:        url
+        ,   cb:         cbPaginate
         });
 
     };
@@ -229,6 +343,11 @@ window.$ = $;
 
         var model = {};
 
+
+        // set the page value in our model
+        model.page = localStorage('page');
+
+
         // render the view
         $doc.trigger('render', {
             $el:        App.$container
@@ -246,10 +365,12 @@ window.$ = $;
 
 
 
-    // run misc UI features
+    // Run misc UI features
+    // =================================================================
+
+    // update copyright date in footer
     d = new Date();
     $('[date="year"]').text(d.getFullYear());
-
 
 
 })();
