@@ -1,7 +1,9 @@
+var _ = require('./lodash.js')
+;
+
 module.exports = function(key, val) {
 
     var ls = window.localStorage;
-
 
     if (key) {
         // if we've provided both parameters, set the property in localStorage
