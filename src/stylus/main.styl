@@ -120,3 +120,40 @@ footer
     top: auto
     bottom: 0
     background-color: $platinum
+
+
+
+// EXTRANEOUS STUFF HERE
+$gitIconSize    = 3.9rem
+
+.github-corner
+    border: 0
+    color: $white
+    fill: $blue
+    transition: .2s linear fill color
+    width: $gitIconSize
+    height: $gitIconSize
+    position: fixed
+    right: 0
+    z-index: 99
+    top: 0
+
+    &:hover
+        background-color: transparent
+        color: $white
+        fill: darken($blue, 15%)
+
+        .octo-arm
+            animation: octocat-wave 560ms infinite
+
+
+@keyframes octocat-wave
+    0% , 50%
+        -webkit-transform: rotate(0)
+        transform: rotate(0)
+
+    25% , 75%
+        -webkit-transform: rotate(-25deg)
+        transform: rotate(-25deg)
+
+
