@@ -16,11 +16,7 @@ var path        = require('path')
 
 // register initial webpack plugins
 var plugins = [
-        new webpack.ProvidePlugin({
-            $: 'zepto-webpack'
-        })
-
-    ,   new webpack.optimize.CommonsChunkPlugin({
+        new webpack.optimize.CommonsChunkPlugin({
             name: "common",
             filename: "common.js",
             minChunks: 2
@@ -43,7 +39,7 @@ if (!debug) {
         new webpack.optimize.UglifyJsPlugin({
             mangle: true,
             sourcemap: true,
-            comments: true,
+            comments: false,
             compress: {
                 warnings: false
             }
