@@ -1,6 +1,13 @@
 
 
-var _ = require('lodash');
+var _ = require('lodash/core');
+
+
+_.merge             = require('lodash/merge');
+_.isPlainObject     = require('lodash/isplainobject');
+_.isInteger         = require('lodash/isinteger');
+_.isNumber          = require('lodash/isnumber');
+_.findIndex         = require('lodash/findindex');
 
 
 /**
