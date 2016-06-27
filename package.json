@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run bootstrap && npm run css && npm run templates && npm run build",
     "bootstrap": "node bin/bootstrap",
     "serve": "node bin/serve --spa",
     "build": "webpack",

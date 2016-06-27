@@ -14,7 +14,7 @@ fs.mkdir(path.resolve(process.cwd(), 'logs'));
 var envContents = [
     '# Flip flop these values to trigger production builds in webpack'
 ,   'NODE_ENV=local'
-,   '#NODE_ENV=production'
+,   '; NODE_ENV=production'
 ,   ''
 ,   '# Set the physical server address for your API instance'
 ,   'API_URL = YOUR_API_ROUTE_HERE'
@@ -25,4 +25,8 @@ var envContents = [
 
 
 // write base environment file to disk
-fs.write(path.resolve(process.cwd(), '.env'), envContents);
+var envFile = path.resolve(process.cwd(), '.env');
+
+if (!fs.exists(envFile)) {
+    fs.write(envFile, envContents);
+}
