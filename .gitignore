@@ -8,9 +8,10 @@ node_modules/
 logs/
 *.log
 
-# BUILD FILES
+# COMPILED ASSETS
 public/build/
 public/data/
+src/js/template-files.js
 
 # MISC THINGS
 __*
