@@ -2,7 +2,8 @@
 // @sauce: https://github.com/mrmrs/colors
 // colors
 $aqua           = #7fdbff
-$blue           = #0074d9
+// $blue           = #0074d9
+$blue           = #3498db
 $navy           = #001f3f
 $teal           = #39cccc
 $green          = #2ecc40
@@ -25,6 +26,9 @@ $gray           = #aaa
 $black          = #353535
 
 
+$font-stack     = 'Source Sans Pro', sans-serif
+
+
 @import "_normalize"
 @import "schema/index"
 @import "_fontawesome"
@@ -39,6 +43,7 @@ $black          = #353535
     padding: 0 .5rem
 
 
+
 // NAVIGATION
 .nav
     position: fixed
@@ -46,6 +51,7 @@ $black          = #353535
     width: 100%
     box-shadow: 0 0 5px rgba(0,0,0,.2)
     padding: 0.6rem 0
+    z-index: 10000
 
 
 
@@ -98,6 +104,12 @@ img
     label
         display: inline-block
 
+    a
+        min-width: 2rem
+        text-align: center
+
+        > i:before
+            margin: 0
 
 
 // FOOTER

@@ -57,7 +57,7 @@ input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder
     color: #cccccc
     font-size: inherit
-    font-family: 'Source Sans Pro', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif
+    font-family: $font-stack
 
 textarea
     height: auto
@@ -99,15 +99,11 @@ input[type="checkbox"]
     font-size: 1rem
     font-weight: 400
     line-height: 1.3125
-    -webkit-border-radius: 6px
-    -moz-border-radius: 6px
-    -ms-border-radius: 6px
-    -o-border-radius: 6px
     border-radius: 6px
     float: left
     color: #777777
     vertical-align: middle
-    font-family: 'Source Sans Pro', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif
+    font-family: $font-stack
     padding: 0.5rem 0.875rem
     border: 1px solid #cccccc
     outline: 0
@@ -138,10 +134,6 @@ input[type="checkbox"]
 .form-element-lg > .form-group-btn:first-child > .btn.btn-pill,
 .form-element-lg > .form-group-btn:last-child > .btn.btn-pill .form-element-group-lg > .form-group-btn:first-child > .btn.btn-pill,
 .form-element-group-lg > .form-group-btn:last-child > .btn.btn-pill
-    -webkit-border-radius: 60px
-    -moz-border-radius: 60px
-    -ms-border-radius: 60px
-    -o-border-radius: 60px
     border-radius: 60px
 
 .form-element-sm,
@@ -159,9 +151,7 @@ input[type="checkbox"]
 .form-element:focus
     outline: 0
     outline: thin dotted \9
-    border-color: #24cabc
-    -webkit-box-shadow: 0 0 8px rgba(36, 202, 188, 0.6)
-    -moz-box-shadow: 0 0 8px rgba(36, 202, 188, 0.6)
+    border-color: $blue
     box-shadow: 0 0 8px rgba(36, 202, 188, 0.6)
 
 .form-element-extra,
@@ -173,7 +163,7 @@ input[type="checkbox"]
     background-color: #eeeeee
     border: 1px solid #cccccc
     padding: 0.5rem 0.875rem
-    font-family: 'Source Sans Pro', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif
+    font-family: $font-stack
     text-align: center
     vertical-align: middle
     z-index: 1000

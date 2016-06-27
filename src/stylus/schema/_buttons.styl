@@ -52,7 +52,7 @@ a:hover.btn-primary-outline,
     color: #777777
     border: 1px solid transparent
     display: inline-block
-    font-family: 'Source Sans Pro', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif
+    font-family: $font-stack
     font-weight: 400
     cursor: pointer
     text-decoration: none
@@ -74,10 +74,6 @@ a:hover.btn-primary-outline,
     border-radius: 6px
 
 .btn-pill
-    -webkit-border-radius: 24px
-    -moz-border-radius: 24px
-    -ms-border-radius: 24px
-    -o-border-radius: 24px
     border-radius: 24px
 
 .btn-link
@@ -116,8 +112,6 @@ a:hover.btn-default-gradient
     color: #777777
     background-color: #e9e9e9
     border-color: #b6b6b6
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -142,8 +136,6 @@ a:hover.btn-default-gradient
     color: #777777
     background-color: rgba(0, 0, 0, 0)
     border-color: #616161
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -157,8 +149,6 @@ a:hover.btn-default-gradient
 
 .btn-default-outline:active,
 .default-outline:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-default-gradient,
@@ -185,8 +175,6 @@ a:hover.btn-default-gradient
 
 .btn-default-gradient:active,
 .default-gradient:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-primary,
@@ -208,8 +196,6 @@ a:hover.btn-default-gradient
     color: $white
     background-color: #2282c1
     border-color: #1d6da3
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -234,8 +220,6 @@ a:hover.btn-default-gradient
     color: #3498db
     background-color: rgba(0, 0, 0, 0)
     border-color: #2282c1
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -248,8 +232,6 @@ a:hover.btn-default-gradient
 
 .btn-primary-outline:active,
 .primary-outline:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-primary-gradient,
@@ -277,8 +259,6 @@ a:hover.btn-default-gradient
 
 .btn-primary-gradient:active,
 .primary-gradient:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-danger,
@@ -300,8 +280,6 @@ a:hover.btn-default-gradient
     color: $white
     background-color: #dd2d1b
     border-color: #bd2717
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -326,8 +304,6 @@ a:hover.btn-default-gradient
     color: #e74c3c
     background-color: rgba(0, 0, 0, 0)
     border-color: #dd2d1b
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -340,8 +316,6 @@ a:hover.btn-default-gradient
 
 .btn-danger-outline:active,
 .danger-outline:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-danger-gradient,
@@ -369,14 +343,12 @@ a:hover.btn-default-gradient
 
 .btn-danger-gradient:active,
 .danger-gradient:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-info,
 .nav > li > a.btn-info
     color: $white
-    background-color: #24cabc
+    background-color: $blue
     border-color: #1faca0
     -webkit-transition: all 0.25s ease
     -moz-transition: all 0.25s ease
@@ -392,17 +364,15 @@ a:hover.btn-default-gradient
     color: $white
     background-color: #1da59a
     border-color: #18877e
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
 
 .btn-info-outline,
 .info-outline
-    color: #24cabc
+    color: $blue
     background-color: transparent
-    border-color: #24cabc
+    border-color: $blue
     -webkit-transition: all 0.25s ease
     -moz-transition: all 0.25s ease
     transition: all 0.25s ease
@@ -415,11 +385,9 @@ a:hover.btn-default-gradient
 
 .btn-info-outline:active,
 .info-outline:active
-    color: #24cabc
+    color: $blue
     background-color: rgba(0, 0, 0, 0)
     border-color: #1da59a
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -428,17 +396,15 @@ a:hover.btn-default-gradient
 .info-outline:hover
     border-color: rgba(0, 0, 0, 0.08)
     color: $white
-    background-color: #24cabc
+    background-color: $blue
 
 .btn-info-outline:active,
 .info-outline:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-info-gradient,
 .info-gradient
-    background: #24cabc
+    background: $blue
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #22c1b4), color-stop(1, #6fe5db))
     background: -ms-linear-gradient(bottom, #22c1b4, #6fe5db)
     background: -moz-linear-gradient(center bottom, #22c1b4 0%, #6fe5db 100%)
@@ -446,23 +412,21 @@ a:hover.btn-default-gradient
     background-image: linear-gradient(top, #22c1b4, #6fe5db)
     filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='#6fe5db', endColorstr='#22c1b4', GradientType=0)")
     color: $white
-    border: 1px solid #24cabc
+    border: 1px solid $blue
 
 .btn-info-gradient:hover,
 .info-gradient:hover
-    background: #24cabc
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #24cabc), color-stop(1, #24cabc))
-    background: -ms-linear-gradient(bottom, #24cabc, #24cabc)
-    background: -moz-linear-gradient(center bottom, #24cabc 0%, #24cabc 100%)
-    background: -o-linear-gradient(#24cabc, #24cabc)
-    background-image: linear-gradient(top, #24cabc, #24cabc)
-    filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='#24cabc', endColorstr='#24cabc', GradientType=0)")
+    background: $blue
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, $blue), color-stop(1, $blue))
+    background: -ms-linear-gradient(bottom, $blue, $blue)
+    background: -moz-linear-gradient(center bottom, $blue 0%, $blue 100%)
+    background: -o-linear-gradient($blue, $blue)
+    background-image: linear-gradient(top, $blue, $blue)
+    filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='${blue}', endColorstr='${blue}', GradientType=0)")
     border-color: rgba(0, 0, 0, 0.08)
 
 .btn-info-gradient:active,
 .info-gradient:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-warning,
@@ -484,8 +448,6 @@ a:hover.btn-default-gradient
     color: $white
     background-color: #cf830a
     border-color: #ad6e09
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -510,8 +472,6 @@ a:hover.btn-default-gradient
     color: #f39c12
     background-color: rgba(0, 0, 0, 0)
     border-color: #cf830a
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -524,8 +484,6 @@ a:hover.btn-default-gradient
 
 .btn-warning-outline:active,
 .warning-outline:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-warning-gradient,
@@ -553,8 +511,6 @@ a:hover.btn-default-gradient
 
 .btn-warning-gradient:active,
 .warning-gradient:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-success,
@@ -576,8 +532,6 @@ a:hover.btn-default-gradient
     color: $white
     background-color: #26a95d
     border-color: #1f8b4d
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -602,8 +556,6 @@ a:hover.btn-default-gradient
     color: #2ecc71
     background-color: rgba(0, 0, 0, 0)
     border-color: #26a95d
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     //     .transition(all .25s ease)
     outline: 0
@@ -616,8 +568,6 @@ a:hover.btn-default-gradient
 
 .btn-success-outline:active,
 .success-outline:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
 
 .btn-success-gradient,
@@ -645,6 +595,4 @@ a:hover.btn-default-gradient
 
 .btn-success-gradient:active,
 .success-gradient:active
-    -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
     box-shadow: inset 0px 2px 4px 1px rgba(0, 0, 0, 0.15)
