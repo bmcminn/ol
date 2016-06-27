@@ -10,7 +10,7 @@ logs/
 
 # COMPILED ASSETS
 public/build/
-public/data/
+public/css/
 src/js/template-files.js
 
 # MISC THINGS
