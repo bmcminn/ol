@@ -6,11 +6,11 @@
   "scripts": {
     "postinstall": "npm run bootstrap && npm run css && npm run templates && npm run build",
     "bootstrap": "node bin/bootstrap",
-    "serve": "node bin/serve --spa",
-    "build": "webpack",
     "css": "stylus -c -m src/stylus/main.styl -o public/css/main.css",
     "templates": "handlebars ./views -f ./src/js/template-files.js -c ./handlebars.js -e hbs",
+    "build": "webpack",
     "watch": "npm-scripts-watcher",
+    "serve": "node bin/serve --spa",
     "test": "mocha ./tests/app-modules",
     "mocha": "mocha"
   },
