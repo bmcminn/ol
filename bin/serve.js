@@ -80,7 +80,7 @@ require('http').createServer(function (request, response) {
 
 
     // fake the server config that would load index.html as the primary router for all routes
-    if (!request.url.match(/\.(?:css|js|woff2|png|gif|jpg|jpeg)/g)) {
+    if (!request.url.match(/\.(?:css|js|woff|woff2|eot|svg|ttf|png|gif|jpg|jpeg)/g)) {
         response.write(fs.read(path.resolve(process.cwd(), 'public', 'index.html')));
         response.end();
         return;
