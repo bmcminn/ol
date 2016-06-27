@@ -7,7 +7,7 @@
     "bootstrap": "node bin/bootstrap",
     "serve": "node bin/serve --spa",
     "build": "webpack",
-    "css": "stylus src/stylus/main.styl -o public/css/main.css",
+    "css": "stylus -c -m src/stylus/main.styl -o public/css/main.css",
     "templates": "handlebars ./views -f ./src/js/template-files.js -c ./handlebars.js -e hbs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm-scripts-watcher"
@@ -38,7 +38,6 @@
     "handlebars": "^4.0.5",
     "jquery": "^3.0.0",
     "lodash": "^4.13.1",
-    "lodash.merge": "^4.4.0",
     "page.js": "^4.13.3"
   },
   "devDependencies": {
