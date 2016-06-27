@@ -10,8 +10,9 @@
     "build": "webpack",
     "css": "stylus -c -m src/stylus/main.styl -o public/css/main.css",
     "templates": "handlebars ./views -f ./src/js/template-files.js -c ./handlebars.js -e hbs",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npm-scripts-watcher"
+    "watch": "npm-scripts-watcher",
+    "test": "mocha ./tests/app-modules",
+    "mocha": "mocha"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,6 @@
   "dependencies": {
     "axios": "^0.12.0",
     "handlebars": "^4.0.5",
-    "jquery": "^3.0.0",
     "lodash": "^4.13.1",
     "page.js": "^4.13.3"
   },
@@ -46,6 +46,7 @@
     "dotenv": "^2.0.0",
     "grunt": "^1.0.1",
     "json-loader": "^0.5.4",
+    "mocha": "^2.5.3",
     "nightmare": "^2.5.2",
     "node-static": "^0.7.7",
     "npm-scripts-watcher": "^1.0.2",
