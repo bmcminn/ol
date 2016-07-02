@@ -42,6 +42,9 @@ cd path/to/github/projects/folder
 # clone the repo down from Github
 git clone https://github.com/bmcminn/ol ol-brandtley
 
+# navigate into the newly created repo folder
+cd ol-brandtley
+
 # install Node dependencies
 npm i
 ```
