@@ -35,6 +35,14 @@ window.$ = $;
     App.$container  = $('[role="app"]');
 
 
+    // initialize base app model
+    App.model = {};
+
+    // setup maps api key for use in profile views
+    App.model.mapsApiKey = 'AIzaSyDfjOEUQlwMxTZC0nRdErH9mTVTMEo05aE'
+
+
+
     // setup page sizes list for controlling number of lsitings returned by API
     App.pageSizes = [
         { size: 25 }
@@ -56,7 +64,6 @@ window.$ = $;
     Api.meta.docsPath               = 'https://path.to/our/api/docs/specs';
     Api.meta.maxResultsLength       = 200;
     Api.meta.defaultResultsLength   = 50;
-
 
     // setup API routes
     Api.Routes.businesses = '/businesses'
@@ -100,7 +107,8 @@ window.$ = $;
         ,   model:      {}
         ,   template:   null
         ,   url:        null
-        ,   cb:         function(pageModel) { return pageModel; }
+        ,   modelMutator:   function(pageModel) { return pageModel; }
+        ,   postRender:     function(data) { return null; }
         }, data);
 
 
@@ -119,7 +127,7 @@ window.$ = $;
                 model = _.merge(localStorage(url), model);
 
                 // call all model mutation
-                model = data.cb(model);
+                model = data.modelMutator(model);
 
                 localStorage(url, model);
 
@@ -132,7 +140,7 @@ window.$ = $;
                         model = _.merge(model, res.data);
 
                         // call all model mutation
-                        model = data.cb(model);
+                        model = data.modelMutator(model);
 
                         localStorage(url, model);
                         $el.html(template(model));
@@ -144,6 +152,12 @@ window.$ = $;
         } else {
             $el.html(template(model));
 
+        }
+
+
+        // run post render callback to manipulate the view
+        if (data.postRender && typeof(data.postRender) === 'function') {
+            data.postRender();
         }
 
         // console.debug('model', model);
@@ -191,7 +205,7 @@ window.$ = $;
         console.debug('homepage');
 
         var template    = Handlebars.templates['home']
-        ,   model       = {}
+        ,   model       = App.model
         ;
 
 
@@ -216,11 +230,13 @@ window.$ = $;
         var params      = ctx.params
         ,   url         = Api.Routes.businesses
         ,   template    = Handlebars.templates['business-listing']
-        ,   model       = {}
+        ,   model       = App.model
         ;
 
         model.per_page = params.per_page = localStorage('per_page');
 
+
+        console.log(model);
 
         // set the current page we're browsing
         if (params.page) {
@@ -305,6 +321,7 @@ window.$ = $;
         }
 
 
+
         // establish page sizes and ensure they're sorted accordingly
         model.pageSizes = App.pageSizes.sort(function(a, b) { return a - b; });
 
@@ -312,13 +329,93 @@ window.$ = $;
         url += encodeURIComponent('?' + _.serialize(params, '&'));
 
 
+
+
+
+
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+
+        initMap = function() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                // center on continguous united states
+                center: {lat: 39.5, lng: -98.65}
+                // center: {lat: 41.850, lng: -87.650}
+            ,   zoom: 4
+            // ,
+            });
+
+
+
+
+            // google.maps.event.trigger(map, 'resize');
+
+            var infoWindow = new google.maps.InfoWindow({map: map});
+
+            infoWindow.setPosition(map.center);
+            // infoWindow.setContent('Location found.');
+            map.setCenter(map.center);
+
+            console.log(infoWindow);
+            // // Try HTML5 geolocation.
+            // if (navigator.geolocation) {
+            //   navigator.geolocation.getCurrentPosition(function(position) {
+            //     var pos = {
+            //       lat: position.coords.latitude,
+            //       lng: position.coords.longitude
+            //     };
+
+                // infoWindow.setPosition(pos);
+                // infoWindow.setContent('Location found.');
+            //     map.setCenter(pos);
+            //   }, function() {
+            //     handleLocationError(true, infoWindow, map.getCenter());
+            //   });
+            // } else {
+            //   // Browser doesn't support Geolocation
+            //   handleLocationError(false, infoWindow, map.getCenter());
+            // }
+        }
+
+        // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        //   infoWindow.setPosition(pos);
+        //   infoWindow.setContent(browserHasGeolocation ?
+        //                         'Error: The Geolocation service failed.' :
+        //                         'Error: Your browser doesn\'t support geolocation.');
+        // }
+
+
+
+
+
+        var cbPostRender = function() {
+
+            var mapData = localStorage(url);
+
+            console.log(mapData);
+
+
+
+            initMap();
+        }
+
+
+
+
+
+
+
+
         // render the view
         $doc.trigger('render', {
-            $el:        App.$container
-        ,   model:      model
-        ,   template:   template
-        ,   url:        url
-        ,   cb:         cbPaginate
+            $el:            App.$container
+        ,   model:          model
+        ,   template:       template
+        ,   url:            url
+        ,   modelMutator:   cbPaginate
+        ,   postRender:     cbPostRender
         });
 
     };
@@ -339,9 +436,8 @@ window.$ = $;
         var params      = ctx.params
         ,   url         = [Api.Routes.businesses, params.id].join('/')
         ,   template    = Handlebars.templates['business-profile']
+        ,   model       = App.model
         ;
-
-        var model = {};
 
 
         // set the page value in our model

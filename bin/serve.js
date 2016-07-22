@@ -52,35 +52,35 @@ require('http').createServer(function (request, response) {
 
     console.log('____URL____:', request.url);
 
-    if (process.env.USE_API_PROXY === false && request.url.match(/\/api\//i)) {
-        console.log("Since you're not using the API proxy, you should probably change the `axios.defaults.baseURL` variable in `src/main.js`");
-        return;
-    }
+    // if (process.env.USE_API_PROXY === false && request.url.match(/^\/api\//i)) {
+    //     console.log("Since you're not using the API proxy, you should probably change the `axios.defaults.baseURL` variable in `src/main.js`");
+    //     return;
+    // }
 
-    // setup a proxy for the API calls
-    if (process.env.USE_API_PROXY && request.url.match(/\/api\//i)) {
+    // // setup a proxy for the API calls
+    // if (process.env.USE_API_PROXY && request.url.match(/\/api\//i)) {
 
-        var route = url.parse(decodeURIComponent(request.url));
-        route.path = route.path.replace(/^\/api/, '');
+    //     var route = url.parse(decodeURIComponent(request.url));
+    //     route.path = route.path.replace(/^\/api/, '');
 
-        var apiRoute = url.resolve(api.url, route.path);
+    //     var apiRoute = url.resolve(api.url, route.path);
 
-        console.log(apiRoute);
+    //     console.log(apiRoute);
 
-        // execute a curl command to proxy this stuff
-        var res = execSync(`curl "${apiRoute}"`, { encoding: 'utf8' });
+    //     // execute a curl command to proxy this stuff
+    //     var res = execSync(`curl "${apiRoute}"`, { encoding: 'utf8' });
 
-        // write the response back to client
-        response.write(res);
-        response.end();
+    //     // write the response back to client
+    //     response.write(res);
+    //     response.end();
 
-        // break the response handler chain
-        return;
-    }
+    //     // break the response handler chain
+    //     return;
+    // }
 
 
     // fake the server config that would load index.html as the primary router for all routes
-    if (!request.url.match(/\.(?:css|js|woff|woff2|eot|svg|ttf|png|gif|jpg|jpeg)/g)) {
+    if (!request.url.match(/\.(?:css|js|woff|woff2|eot|svg|ttf|png|gif|jpg|jpeg|GetMapImage)/g)) {
         response.write(fs.read(path.resolve(process.cwd(), 'public', 'index.html')));
         response.end();
         return;

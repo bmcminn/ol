@@ -2,20 +2,41 @@
 
 <hr>
 
-{{> pagination per_page=model.per_page }}
 
-<hr>
+<div class="container">
 
-<ul role="listings">
-{{#each businesses}}
-    <li class="">
-        <a class="" href="/businesses/{{ id }}">{{ name }}</a>
-        <span class="text-right">{{ city }}, {{ state }}</span>
-    </li>
-{{/each}}
-</ul>
+    {{> pagination per_page=model.per_page }}
 
-<hr>
+    <div class="col6">
+        <ul role="listings">
+        {{#each businesses}}
+            <li class="">
+                <a class="" href="/businesses/{{ id }}">{{ name }}</a>
+                <span class="text-right">{{ city }}, {{ state }}</span>
+            </li>
+        {{/each}}
+        </ul>
 
-{{> pagination per_page=model.per_page }}
+
+    <hr>
+
+    {{> pagination per_page=model.per_page }}
+
+    </div>
+
+
+
+    <div class="col6">
+
+        {{> mapsListing }}
+
+    </div>
+
+
+
+
+</div>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ mapsApiKey }}&callback=initMap"></script>
 
